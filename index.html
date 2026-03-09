@@ -181,6 +181,42 @@
             color: #667eea;
         }
         
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-top: 4px solid #667eea;
+        }
+        
+        .stat-card.alt {
+            border-top-color: #764ba2;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin: 0.5rem 0;
+        }
+        
+        .stat-card.alt .stat-number {
+            color: #764ba2;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-weight: 500;
+        }
+        
         footer {
             background-color: #2d3748;
             color: white;
@@ -236,6 +272,24 @@
         <section id="overview" class="active">
             <h2>Financial Documentation Overview</h2>
             <p>This documentation provides a comprehensive guide to understanding and analyzing financial statements. Whether you're a business owner, investor, or financial analyst, these materials will help you make informed decisions.</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">📊</div>
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Core Financial Statements</div>
+                </div>
+                <div class="stat-card alt">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">📈</div>
+                    <div class="stat-number">6+</div>
+                    <div class="stat-label">Key Financial Ratios</div>
+                </div>
+                <div class="stat-card">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">💡</div>
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Free Learning Resources</div>
+                </div>
+            </div>
             
             <h3>What You'll Find Here</h3>
             <div class="doc-grid">
@@ -322,6 +376,45 @@
             <p><strong>Gross Profit Margin:</strong> (Gross Profit / Revenues) × 100</p>
             <p><strong>Operating Profit Margin:</strong> (Operating Income / Revenues) × 100</p>
             <p><strong>Net Profit Margin:</strong> (Net Income / Revenues) × 100</p>
+            
+            <h3>Sample Income Statement Visualization</h3>
+            <svg width="100%" height="400" viewBox="0 0 600 400" style="background: white; border-radius: 8px; margin: 1rem 0;">
+                <!-- Title -->
+                <text x="300" y="25" font-size="20" font-weight="bold" text-anchor="middle" fill="#667eea">Annual Income Statement</text>
+                
+                <!-- Y-axis -->
+                <line x1="60" y1="50" x2="60" y2="350" stroke="#999" stroke-width="2"/>
+                <line x1="60" y1="350" x2="550" y2="350" stroke="#999" stroke-width="2"/>
+                
+                <!-- Y-axis labels -->
+                <text x="50" y="355" font-size="12" text-anchor="end">0</text>
+                <text x="50" y="295" font-size="12" text-anchor="end">$100K</text>
+                <text x="50" y="235" font-size="12" text-anchor="end">$200K</text>
+                <text x="50" y="175" font-size="12" text-anchor="end">$300K</text>
+                <text x="50" y="115" font-size="12" text-anchor="end">$400K</text>
+                <text x="50" y="55" font-size="12" text-anchor="end">$500K</text>
+                
+                <!-- Bars -->
+                <rect x="100" y="80" width="60" height="270" fill="#667eea"/>
+                <text x="130" y="365" font-size="12" text-anchor="middle" fill="#333">Revenue</text>
+                <text x="130" y="50" font-size="14" font-weight="bold" text-anchor="middle" fill="#667eea">$500K</text>
+                
+                <rect x="180" y="170" width="60" height="180" fill="#764ba2"/>
+                <text x="210" y="365" font-size="12" text-anchor="middle" fill="#333">COGS</text>
+                <text x="210" y="155" font-size="14" font-weight="bold" text-anchor="middle" fill="#764ba2">$200K</text>
+                
+                <rect x="260" y="180" width="60" height="170" fill="#667eea"/>
+                <text x="290" y="365" font-size="12" text-anchor="middle" fill="#333">Gross Profit</text>
+                <text x="290" y="165" font-size="14" font-weight="bold" text-anchor="middle" fill="#667eea">$300K</text>
+                
+                <rect x="340" y="230" width="60" height="120" fill="#764ba2"/>
+                <text x="370" y="365" font-size="12" text-anchor="middle" fill="#333">Operating Exp</text>
+                <text x="370" y="215" font-size="14" font-weight="bold" text-anchor="middle" fill="#764ba2">$150K</text>
+                
+                <rect x="420" y="250" width="60" height="100" fill="#667eea"/>
+                <text x="450" y="365" font-size="12" text-anchor="middle" fill="#333">Net Income</text>
+                <text x="450" y="235" font-size="14" font-weight="bold" text-anchor="middle" fill="#667eea">$120K</text>
+            </svg>
         </section>
         
         <!-- Balance Sheet Section -->
@@ -370,6 +463,39 @@
                     </tr>
                 </tbody>
             </table>
+            
+            <h3>Balance Sheet Composition</h3>
+            <svg width="100%" height="400" viewBox="0 0 900 400" style="background: white; border-radius: 8px; margin: 1rem 0;">
+                <!-- Title -->
+                <text x="450" y="25" font-size="20" font-weight="bold" text-anchor="middle" fill="#667eea">Total Assets: $1,000,000</text>
+                
+                <!-- Assets Side -->
+                <text x="150" y="60" font-size="16" font-weight="bold" fill="#667eea">ASSETS</text>
+                <rect x="50" y="80" width="200" height="120" fill="#667eea" opacity="0.8"/>
+                <text x="150" y="130" font-size="14" font-weight="bold" text-anchor="middle" fill="white">Current Assets</text>
+                <text x="150" y="155" font-size="12" text-anchor="middle" fill="white">$400,000 (40%)</text>
+                
+                <rect x="50" y="220" width="200" height="80" fill="#667eea" opacity="0.5"/>
+                <text x="150" y="260" font-size="12" font-weight="bold" text-anchor="middle" fill="white">Fixed Assets</text>
+                <text x="150" y="280" font-size="11" text-anchor="middle" fill="white">$600,000 (60%)</text>
+                
+                <!-- Equals Sign -->
+                <text x="450" y="200" font-size="24" font-weight="bold" text-anchor="middle" fill="#667eea">=</text>
+                
+                <!-- Liabilities & Equity Side -->
+                <text x="750" y="60" font-size="16" font-weight="bold" fill="#764ba2">LIABILITIES + EQUITY</text>
+                <rect x="650" y="80" width="200" height="80" fill="#764ba2" opacity="0.8"/>
+                <text x="750" y="120" font-size="12" font-weight="bold" text-anchor="middle" fill="white">Current Liabilities</text>
+                <text x="750" y="140" font-size="11" text-anchor="middle" fill="white">$200,000 (20%)</text>
+                
+                <rect x="650" y="180" width="200" height="60" fill="#764ba2" opacity="0.65"/>
+                <text x="750" y="210" font-size="11" font-weight="bold" text-anchor="middle" fill="white">Long-term Liabilities</text>
+                <text x="750" y="228" font-size="10" text-anchor="middle" fill="white">$150,000 (15%)</text>
+                
+                <rect x="650" y="260" width="200" height="100" fill="#667eea" opacity="0.8"/>
+                <text x="750" y="310" font-size="12" font-weight="bold" text-anchor="middle" fill="white">Shareholders' Equity</text>
+                <text x="750" y="330" font-size="11" text-anchor="middle" fill="white">$650,000 (65%)</text>
+            </svg>
         </section>
         
         <!-- Cash Flow Section -->
@@ -391,6 +517,51 @@
             <div class="example-box">
                 <strong>Formula:</strong> Ending Cash Balance = Beginning Cash + Operating CF + Investing CF + Financing CF
             </div>
+            
+            <h3>Cash Flow Visualization</h3>
+            <svg width="100%" height="350" viewBox="0 0 900 350" style="background: white; border-radius: 8px; margin: 1rem 0;">
+                <!-- Title -->
+                <text x="450" y="25" font-size="20" font-weight="bold" text-anchor="middle" fill="#667eea">Cash Flow Movement</text>
+                
+                <!-- Operating Activities -->
+                <rect x="50" y="80" width="200" height="100" fill="#667eea" rx="8"/>
+                <text x="150" y="110" font-size="14" font-weight="bold" text-anchor="middle" fill="white">Operating</text>
+                <text x="150" y="135" font-size="12" text-anchor="middle" fill="white">Activities</text>
+                <text x="150" y="160" font-size="13" font-weight="bold" text-anchor="middle" fill="white">+$250K</text>
+                
+                <!-- Arrow -->
+                <path d="M 260 130 L 300 130" stroke="#667eea" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                
+                <!-- Investing Activities -->
+                <rect x="310" y="80" width="200" height="100" fill="#764ba2" rx="8"/>
+                <text x="410" y="110" font-size="14" font-weight="bold" text-anchor="middle" fill="white">Investing</text>
+                <text x="410" y="135" font-size="12" text-anchor="middle" fill="white">Activities</text>
+                <text x="410" y="160" font-size="13" font-weight="bold" text-anchor="middle" fill="white">-$100K</text>
+                
+                <!-- Arrow -->
+                <path d="M 520 130 L 560 130" stroke="#764ba2" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                
+                <!-- Financing Activities -->
+                <rect x="570" y="80" width="200" height="100" fill="#667eea" rx="8"/>
+                <text x="670" y="110" font-size="14" font-weight="bold" text-anchor="middle" fill="white">Financing</text>
+                <text x="670" y="135" font-size="12" text-anchor="middle" fill="white">Activities</text>
+                <text x="670" y="160" font-size="13" font-weight="bold" text-anchor="middle" fill="white">+$50K</text>
+                
+                <!-- Down arrow -->
+                <path d="M 450 200 L 450 240" stroke="#667eea" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                
+                <!-- Result -->
+                <rect x="300" y="250" width="300" height="80" fill="#f0f2ff" stroke="#667eea" stroke-width="2" rx="8"/>
+                <text x="450" y="280" font-size="14" font-weight="bold" text-anchor="middle" fill="#667eea">Net Change in Cash</text>
+                <text x="450" y="310" font-size="16" font-weight="bold" text-anchor="middle" fill="#667eea">+$200K</text>
+                
+                <!-- Arrow marker definition -->
+                <defs>
+                    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                        <polygon points="0 0, 10 3, 0 6" fill="#667eea"/>
+                    </marker>
+                </defs>
+            </svg>
         </section>
         
         <!-- Financial Ratios Section -->
@@ -466,6 +637,58 @@
                     </tr>
                 </tbody>
             </table>
+            
+            <h3>Profitability Trends</h3>
+            <svg width="100%" height="350" viewBox="0 0 700 350" style="background: white; border-radius: 8px; margin: 1rem 0;">
+                <!-- Title -->
+                <text x="350" y="25" font-size="18" font-weight="bold" text-anchor="middle" fill="#667eea">Profit Margin Trends (4 Quarters)</text>
+                
+                <!-- Grid lines -->
+                <line x1="60" y1="300" x2="650" y2="300" stroke="#e0e0e0" stroke-width="1"/>
+                <line x1="60" y1="240" x2="650" y2="240" stroke="#e0e0e0" stroke-width="1"/>
+                <line x1="60" y1="180" x2="650" y2="180" stroke="#e0e0e0" stroke-width="1"/>
+                <line x1="60" y1="120" x2="650" y2="120" stroke="#e0e0e0" stroke-width="1"/>
+                <line x1="60" y1="60" x2="650" y2="60" stroke="#e0e0e0" stroke-width="1"/>
+                
+                <!-- Axes -->
+                <line x1="60" y1="30" x2="60" y2="310" stroke="#333" stroke-width="2"/>
+                <line x1="60" y1="310" x2="650" y2="310" stroke="#333" stroke-width="2"/>
+                
+                <!-- Y-axis labels -->
+                <text x="45" y="315" font-size="11" text-anchor="end">0%</text>
+                <text x="45" y="245" font-size="11" text-anchor="end">5%</text>
+                <text x="45" y="185" font-size="11" text-anchor="end">10%</text>
+                <text x="45" y="125" font-size="11" text-anchor="end">15%</text>
+                <text x="45" y="65" font-size="11" text-anchor="end">20%</text>
+                
+                <!-- X-axis labels -->
+                <text x="130" y="330" font-size="11" text-anchor="middle">Q1</text>
+                <text x="270" y="330" font-size="11" text-anchor="middle">Q2</text>
+                <text x="410" y="330" font-size="11" text-anchor="middle">Q3</text>
+                <text x="550" y="330" font-size="11" text-anchor="middle">Q4</text>
+                
+                <!-- Gross Profit Line -->
+                <polyline points="130,210 270,180 410,150 550,120" fill="none" stroke="#667eea" stroke-width="3"/>
+                <circle cx="130" cy="210" r="4" fill="#667eea"/>
+                <circle cx="270" cy="180" r="4" fill="#667eea"/>
+                <circle cx="410" cy="150" r="4" fill="#667eea"/>
+                <circle cx="550" cy="120" r="4" fill="#667eea"/>
+                
+                <!-- Operating Profit Line -->
+                <polyline points="130,260 270,240 410,210 550,180" fill="none" stroke="#764ba2" stroke-width="3"/>
+                <circle cx="130" cy="260" r="4" fill="#764ba2"/>
+                <circle cx="270" cy="240" r="4" fill="#764ba2"/>
+                <circle cx="410" cy="210" r="4" fill="#764ba2"/>
+                <circle cx="550" cy="180" r="4" fill="#764ba2"/>
+                
+                <!-- Legend -->
+                <rect x="480" y="50" width="150" height="70" fill="white" stroke="#ddd" stroke-width="1" rx="4"/>
+                <line x1="495" y1="65" x2="520" y2="65" stroke="#667eea" stroke-width="2"/>
+                <text x="530" y="70" font-size="12" fill="#333">Gross Profit</text>
+                
+                <line x1="495" y1="90" x2="520" y2="90" stroke="#764ba2" stroke-width="2"/>
+                <text x="530" y="95" font-size="12" fill="#333">Operating Profit</text>
+            </svg>
         </section>
         
         <!-- Resources Section -->
