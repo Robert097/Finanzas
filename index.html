@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9fafb;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        nav {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
+        }
+        
+        nav a {
+            display: block;
+            padding: 1rem 1.5rem;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+        
+        nav a:hover {
+            background-color: #f0f2ff;
+            border-bottom-color: #667eea;
+        }
+        
+        main {
+            padding: 3rem 0;
+            min-height: calc(100vh - 300px);
+        }
+        
+        section {
+            margin-bottom: 4rem;
+            display: none;
+        }
+        
+        section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        h2 {
+            color: #667eea;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+        
+        h3 {
+            color: #764ba2;
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: #555;
+        }
+        
+        .doc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .doc-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-left: 4px solid #667eea;
+        }
+        
+        .doc-card:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+        }
+        
+        .doc-card h4 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        th {
+            background-color: #667eea;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tr:hover {
+            background-color: #f9fafb;
+        }
+        
+        .example-box {
+            background-color: #f0f2ff;
+            padding: 1rem;
+            border-left: 4px solid #667eea;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+        
+        .example-box strong {
+            color: #667eea;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-top: 4px solid #667eea;
+        }
+        
+        .stat-card.alt {
+            border-top-color: #764ba2;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin: 0.5rem 0;
+        }
+        
+        .stat-card.alt .stat-number {
+            color: #764ba2;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-weight: 500;
+        }
+        
+        footer {
+            background-color: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+        
+        footer p {
+            color: #cbd5e0;
+            margin: 0.5rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            nav ul {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding: 0 1rem;
+            }
+            
+            nav a {
+                padding: 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>📊 Financial Documentation</h1>
+            <p>Comprehensive guide to financial statements and analysis</p>
+        </div>
+    </header>
+    
+    <nav>
+        <ul class="container">
+            <li><a href="#" class="nav-link active" data-section="overview">Overview</a></li>
+            <li><a href="#" class="nav-link" data-section="income">Income Statement</a></li>
+            <li><a href="#" class="nav-link" data-section="balance">Balance Sheet</a></li>
+            <li><a href="#" class="nav-link" data-section="cashflow">Cash Flow</a></li>
+            <li><a href="#" class="nav-link" data-section="ratios">Financial Ratios</a></li>
+            <li><a href="#" class="nav-link" data-section="resources">Resources</a></li>
+        </ul>
+    </nav>
+    
+    <main class="container">
+        <!-- Overview Section -->
+        <section id="overview" class="active">
+            <h2>Financial Documentation Overview</h2>
+            <p>This documentation provides a comprehensive guide to understanding and analyzing financial statements. Whether you're a business owner, investor, or financial analyst, these materials will help you make informed decisions.</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">📊</div>
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Core Financial Statements</div>
+                </div>
+                <div class="stat-card alt">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">📈</div>
+                    <div class="stat-number">6+</div>
+                    <div class="stat-label">Key Financial Ratios</div>
+                </div>
+                <div class="stat-card">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">💡</div>
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Free Learning Resources</div>
+                </div>
+            </div>
+            
+            <h3>What You'll Find Here</h3>
+            <div class="doc-grid">
+                <div class="doc-card">
+                    <h4>📈 Income Statement</h4>
+                    <p>Learn how to read and analyze income statements, including revenues, expenses, and profitability metrics.</p>
+                </div>
+                <div class="doc-card">
+                    <h4>💰 Balance Sheet</h4>
+                    <p>Understand assets, liabilities, and equity. Master the fundamental accounting equation.</p>
+                </div>
+                <div class="doc-card">
+                    <h4>💵 Cash Flow Statement</h4>
+                    <p>Analyze operational, investing, and financing activities to understand liquidity.</p>
+                </div>
+                <div class="doc-card">
+                    <h4>📊 Financial Ratios</h4>
+                    <p>Explore key performance indicators and how to calculate them for financial analysis.</p>
+                </div>
+                <div class="doc-card">
+                    <h4>🔍 Analysis Techniques</h4>
+                    <p>Discover methods for analyzing financial health and making strategic decisions.</p>
+                </div>
+                <div class="doc-card">
+                    <h4>📚 Additional Resources</h4>
+                    <p>Find links to tools, templates, and further learning materials.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Income Statement Section -->
+        <section id="income">
+            <h2>Income Statement</h2>
+            <p>The income statement, also known as the profit and loss statement (P&L), shows a company's revenues, costs, and expenses during a specific period, ultimately showing the company's net profit or loss.</p>
+            
+            <h3>Key Components</h3>
+            <div class="example-box">
+                <strong>Formula:</strong> Net Income = Revenues - Expenses
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Component</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Revenues</strong></td>
+                        <td>Total income from sales and services</td>
+                        <td>$500,000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cost of Goods Sold</strong></td>
+                        <td>Direct costs to produce goods/services</td>
+                        <td>$200,000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Gross Profit</strong></td>
+                        <td>Revenues - COGS</td>
+                        <td>$300,000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Operating Expenses</strong></td>
+                        <td>Salaries, rent, utilities, etc.</td>
+                        <td>$150,000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Operating Income</strong></td>
+                        <td>Gross Profit - Operating Expenses</td>
+                        <td>$150,000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Net Income</strong></td>
+                        <td>Final profit after all expenses and taxes</td>
+                        <td>$120,000</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>How to Analyze</h3>
+            <p><strong>Gross Profit Margin:</strong> (Gross Profit / Revenues) × 100</p>
+            <p><strong>Operating Profit Margin:</strong> (Operating Income / Revenues) × 100</p>
+            <p><strong>Net Profit Margin:</strong> (Net Income / Revenues) × 100</p>
+            
+            <h3>Sample Income Statement Visualization</h3>
+            <svg width="100%" height="400" viewBox="0 0 600 400" style="background: white; border-radius: 8px; margin: 1rem 0;">
+                <!-- Title -->
+                <text x="300" y="25" font-size="20" font-weight="bold" text-anchor="middle" fill="#667eea">Annual Income Statement</text>
+                
+                <!-- Y-axis -->
+                <line x1="60" y1="50" x2="60" y2="350" stroke="#999" stroke-width="2"/>
+                <line x1="60" y1="350" x2="550" y2="350" stroke="#999" stroke-width="2"/>
+                
+                <!-- Y-axis labels -->
+                <text x="50" y="355" font-size="12" text-anchor="end">0</text>
+                <text x="50" y="295" font-size="12" text-anchor="end">$100K</text>
+                <text x="50" y="235" font-size="12" text-anchor="end">$200K</text>
+                <text x="50" y="175" font-size="12" text-anchor="end">$300K</text>
+                <text x="50" y="115" font-size="12" text-anchor="end">$400K</text>
+                <text x="50" y="55" font-size="12" text-anchor="end">$500K</text>
+                
+                <!-- Bars -->
+                <rect x="100" y="80" width="60" height="270" fill="#667eea"/>
+                <text x="130" y="365" font-size="12" text-anchor="middle" fill="#333">Revenue</text>
+                <text x="130" y="50" font-size="14" font-weight="bold" text-anchor="middle" fill="#667eea">$500K</text>
+                
+                <rect x="180" y="170" width="60" height="180" fill="#764ba2"/>
+                <text x="210" y="365" font-size="12" text-anchor="middle" fill="#333">COGS</text>
+                <text x="210" y="155" font-size="14" font-weight="bold" text-anchor="middle" fill="#764ba2">$200K</text>
+                
+                <rect x="260" y="180" width="60" height="170" fill="#667eea"/>
+                <text x="290" y="365" font-size="12" text-anchor="middle" fill="#333">Gross Profit</text>
+                <text x="290" y="165" font-size="14" font-weight="bold" text-anchor="middle" fill="#667eea">$300K</text>
+                
+                <rect x="340" y="230" width="60" height="120" fill="#764ba2"/>
+                <text x="370" y="365" font-size="12" text-anchor="middle" fill="#333">Operating Exp</text>
+                <text x="370" y="215" font-size="14" font-weight="bold" text-anchor="middle" fill="#764ba2">$150K</text>
+                
+                <rect x="420" y="250" width="60" height="100" fill="#667eea"/>
+                <text x="450" y="365" font-size="12" text-anchor="middle" fill="#333">Net Income</text>
+                <text x="450" y="235" font-size="14" font-weight="bold" text-anchor="middle" fill="#667eea">$120K</text>
+            </svg>
+        </section>
+        
+        <!-- Balance Sheet Section -->
+        <section id="balance">
+            <h2>Balance Sheet</h2>
+            <p>The balance sheet provides a snapshot of a company's financial position at a specific point in time. It shows what the company owns (assets) and owes (liabilities), as well as the amount invested by shareholders (equity).</p>
+            
+            <h3>The Accounting Equation</h3>
+            <div class="example-box">
+                <strong>Assets = Liabilities + Shareholders' Equity</strong>
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Definition</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Current Assets</strong></td>
+                        <td>Cash and assets expected to be converted to cash within one year</td>
+                        <td>Cash, Accounts Receivable, Inventory</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fixed Assets</strong></td>
+                        <td>Long-term assets used in business operations</td>
+                        <td>Property, Equipment, Buildings</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Current Liabilities</strong></td>
+                        <td>Debts due to be paid within one year</td>
+                        <td>Accounts Payable, Short-term Debt</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Long-term Liabilities</strong></td>
+                        <td>Debts due to be paid beyond one year</td>
+                        <td>Bonds, Long-term Loans</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Shareholders' Equity</strong></td>
+                        <td>Ownership stake in the company</td>
+                        <td>Common Stock, Retained Earnings</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Balance Sheet Composition</h3>
+            <svg width="100%" height="400" viewBox="0 0 900 400" style="background: white; border-radius: 8px; margin: 1rem 0;">
+                <!-- Title -->
+                <text x="450" y="25" font-size="20" font-weight="bold" text-anchor="middle" fill="#667eea">Total Assets: $1,000,000</text>
+                
+                <!-- Assets Side -->
+                <text x="150" y="60" font-size="16" font-weight="bold" fill="#667eea">ASSETS</text>
+                <rect x="50" y="80" width="200" height="120" fill="#667eea" opacity="0.8"/>
+                <text x="150" y="130" font-size="14" font-weight="bold" text-anchor="middle" fill="white">Current Assets</text>
+                <text x="150" y="155" font-size="12" text-anchor="middle" fill="white">$400,000 (40%)</text>
+                
+                <rect x="50" y="220" width="200" height="80" fill="#667eea" opacity="0.5"/>
+                <text x="150" y="260" font-size="12" font-weight="bold" text-anchor="middle" fill="white">Fixed Assets</text>
+                <text x="150" y="280" font-size="11" text-anchor="middle" fill="white">$600,000 (60%)</text>
+                
+                <!-- Equals Sign -->
+                <text x="450" y="200" font-size="24" font-weight="bold" text-anchor="middle" fill="#667eea">=</text>
+                
+                <!-- Liabilities & Equity Side -->
+                <text x="750" y="60" font-size="16" font-weight="bold" fill="#764ba2">LIABILITIES + EQUITY</text>
+                <rect x="650" y="80" width="200" height="80" fill="#764ba2" opacity="0.8"/>
+                <text x="750" y="120" font-size="12" font-weight="bold" text-anchor="middle" fill="white">Current Liabilities</text>
+                <text x="750" y="140" font-size="11" text-anchor="middle" fill="white">$200,000 (20%)</text>
+                
+                <rect x="650" y="180" width="200" height="60" fill="#764ba2" opacity="0.65"/>
+                <text x="750" y="210" font-size="11" font-weight="bold" text-anchor="middle" fill="white">Long-term Liabilities</text>
+                <text x="750" y="228" font-size="10" text-anchor="middle" fill="white">$150,000 (15%)</text>
+                
+                <rect x="650" y="260" width="200" height="100" fill="#667eea" opacity="0.8"/>
+                <text x="750" y="310" font-size="12" font-weight="bold" text-anchor="middle" fill="white">Shareholders' Equity</text>
+                <text x="750" y="330" font-size="11" text-anchor="middle" fill="white">$650,000 (65%)</text>
+            </svg>
+        </section>
+        
+        <!-- Cash Flow Section -->
+        <section id="cashflow">
+            <h2>Cash Flow Statement</h2>
+            <p>The cash flow statement tracks the movement of cash in and out of a company. It helps determine whether a company has enough cash to pay its obligations and fund expansion.</p>
+            
+            <h3>Three Main Categories</h3>
+            
+            <h4 style="color: #667eea; margin-top: 1.5rem;">1. Operating Activities</h4>
+            <p>Cash from day-to-day business operations. Includes net income adjusted for depreciation, changes in working capital, etc.</p>
+            
+            <h4 style="color: #667eea;">2. Investing Activities</h4>
+            <p>Cash used for purchasing assets and making investments. Includes capital expenditures, acquisitions, etc.</p>
+            
+            <h4 style="color: #667eea;">3. Financing Activities</h4>
+            <p>Cash from investors and lenders. Includes debt issuance, equity financing, dividend payments, etc.</p>
+            
+            <div class="example-box">
+                <strong>Formula:</strong> Ending Cash Balance = Beginning Cash + Operating CF + Investing CF + Financing CF
+            </div>
+            
+            <h3>Cash Flow Visualization</h3>
+            <svg width="100%" height="350" viewBox="0 0 900 350" style="background: white; border-radius: 8px; margin: 1rem 0;">
+                <!-- Title -->
+                <text x="450" y="25" font-size="20" font-weight="bold" text-anchor="middle" fill="#667eea">Cash Flow Movement</text>
+                
+                <!-- Operating Activities -->
+                <rect x="50" y="80" width="200" height="100" fill="#667eea" rx="8"/>
+                <text x="150" y="110" font-size="14" font-weight="bold" text-anchor="middle" fill="white">Operating</text>
+                <text x="150" y="135" font-size="12" text-anchor="middle" fill="white">Activities</text>
+                <text x="150" y="160" font-size="13" font-weight="bold" text-anchor="middle" fill="white">+$250K</text>
+                
+                <!-- Arrow -->
+                <path d="M 260 130 L 300 130" stroke="#667eea" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                
+                <!-- Investing Activities -->
+                <rect x="310" y="80" width="200" height="100" fill="#764ba2" rx="8"/>
+                <text x="410" y="110" font-size="14" font-weight="bold" text-anchor="middle" fill="white">Investing</text>
+                <text x="410" y="135" font-size="12" text-anchor="middle" fill="white">Activities</text>
+                <text x="410" y="160" font-size="13" font-weight="bold" text-anchor="middle" fill="white">-$100K</text>
+                
+                <!-- Arrow -->
+                <path d="M 520 130 L 560 130" stroke="#764ba2" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                
+                <!-- Financing Activities -->
+                <rect x="570" y="80" width="200" height="100" fill="#667eea" rx="8"/>
+                <text x="670" y="110" font-size="14" font-weight="bold" text-anchor="middle" fill="white">Financing</text>
+                <text x="670" y="135" font-size="12" text-anchor="middle" fill="white">Activities</text>
+                <text x="670" y="160" font-size="13" font-weight="bold" text-anchor="middle" fill="white">+$50K</text>
+                
+                <!-- Down arrow -->
+                <path d="M 450 200 L 450 240" stroke="#667eea" stroke-width="3" fill="none" marker-end="url(#arrowhead)"/>
+                
+                <!-- Result -->
+                <rect x="300" y="250" width="300" height="80" fill="#f0f2ff" stroke="#667eea" stroke-width="2" rx="8"/>
+                <text x="450" y="280" font-size="14" font-weight="bold" text-anchor="middle" fill="#667eea">Net Change in Cash</text>
+                <text x="450" y="310" font-size="16" font-weight="bold" text-anchor="middle" fill="#667eea">+$200K</text>
+                
+                <!-- Arrow marker definition -->
+                <defs>
+                    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                        <polygon points="0 0, 10 3, 0 6" fill="#667eea"/>
+                    </marker>
+                </defs>
+            </svg>
+        </section>
+        
+        <!-- Financial Ratios Section -->
+        <section id="ratios">
+            <h2>Financial Ratios</h2>
+            <p>Financial ratios are useful indicators of a company's performance and financial health. They help compare companies and track progress over time.</p>
+            
+            <h3>Liquidity Ratios</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ratio</th>
+                        <th>Formula</th>
+                        <th>What It Measures</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Current Ratio</strong></td>
+                        <td>Current Assets / Current Liabilities</td>
+                        <td>Ability to pay short-term obligations</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Quick Ratio</strong></td>
+                        <td>(Current Assets - Inventory) / Current Liabilities</td>
+                        <td>Ability to pay without selling inventory</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Profitability Ratios</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ratio</th>
+                        <th>Formula</th>
+                        <th>What It Measures</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>ROA (Return on Assets)</strong></td>
+                        <td>Net Income / Total Assets</td>
+                        <td>How efficiently assets generate profit</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ROE (Return on Equity)</strong></td>
+                        <td>Net Income / Shareholders' Equity</td>
+                        <td>Return generated for shareholders</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Leverage Ratios</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ratio</th>
+                        <th>Formula</th>
+                        <th>What It Measures</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Debt-to-Equity</strong></td>
+                        <td>Total Liabilities / Shareholders' Equity</td>
+                        <td>Financial leverage and risk</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Debt Ratio</strong></td>
+                        <td>Total Liabilities / Total Assets</td>
+                        <td>Proportion of assets financed by debt</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Profitability Trends</h3>
+            <svg width="100%" height="350" viewBox="0 0 700 350" style="background: white; border-radius: 8px; margin: 1rem 0;">
+                <!-- Title -->
+                <text x="350" y="25" font-size="18" font-weight="bold" text-anchor="middle" fill="#667eea">Profit Margin Trends (4 Quarters)</text>
+                
+                <!-- Grid lines -->
+                <line x1="60" y1="300" x2="650" y2="300" stroke="#e0e0e0" stroke-width="1"/>
+                <line x1="60" y1="240" x2="650" y2="240" stroke="#e0e0e0" stroke-width="1"/>
+                <line x1="60" y1="180" x2="650" y2="180" stroke="#e0e0e0" stroke-width="1"/>
+                <line x1="60" y1="120" x2="650" y2="120" stroke="#e0e0e0" stroke-width="1"/>
+                <line x1="60" y1="60" x2="650" y2="60" stroke="#e0e0e0" stroke-width="1"/>
+                
+                <!-- Axes -->
+                <line x1="60" y1="30" x2="60" y2="310" stroke="#333" stroke-width="2"/>
+                <line x1="60" y1="310" x2="650" y2="310" stroke="#333" stroke-width="2"/>
+                
+                <!-- Y-axis labels -->
+                <text x="45" y="315" font-size="11" text-anchor="end">0%</text>
+                <text x="45" y="245" font-size="11" text-anchor="end">5%</text>
+                <text x="45" y="185" font-size="11" text-anchor="end">10%</text>
+                <text x="45" y="125" font-size="11" text-anchor="end">15%</text>
+                <text x="45" y="65" font-size="11" text-anchor="end">20%</text>
+                
+                <!-- X-axis labels -->
+                <text x="130" y="330" font-size="11" text-anchor="middle">Q1</text>
+                <text x="270" y="330" font-size="11" text-anchor="middle">Q2</text>
+                <text x="410" y="330" font-size="11" text-anchor="middle">Q3</text>
+                <text x="550" y="330" font-size="11" text-anchor="middle">Q4</text>
+                
+                <!-- Gross Profit Line -->
+                <polyline points="130,210 270,180 410,150 550,120" fill="none" stroke="#667eea" stroke-width="3"/>
+                <circle cx="130" cy="210" r="4" fill="#667eea"/>
+                <circle cx="270" cy="180" r="4" fill="#667eea"/>
+                <circle cx="410" cy="150" r="4" fill="#667eea"/>
+                <circle cx="550" cy="120" r="4" fill="#667eea"/>
+                
+                <!-- Operating Profit Line -->
+                <polyline points="130,260 270,240 410,210 550,180" fill="none" stroke="#764ba2" stroke-width="3"/>
+                <circle cx="130" cy="260" r="4" fill="#764ba2"/>
+                <circle cx="270" cy="240" r="4" fill="#764ba2"/>
+                <circle cx="410" cy="210" r="4" fill="#764ba2"/>
+                <circle cx="550" cy="180" r="4" fill="#764ba2"/>
+                
+                <!-- Legend -->
+                <rect x="480" y="50" width="150" height="70" fill="white" stroke="#ddd" stroke-width="1" rx="4"/>
+                <line x1="495" y1="65" x2="520" y2="65" stroke="#667eea" stroke-width="2"/>
+                <text x="530" y="70" font-size="12" fill="#333">Gross Profit</text>
+                
+                <line x1="495" y1="90" x2="520" y2="90" stroke="#764ba2" stroke-width="2"/>
+                <text x="530" y="95" font-size="12" fill="#333">Operating Profit</text>
+            </svg>
+        </section>
+        
+        <!-- Resources Section -->
+        <section id="resources">
+            <h2>Resources & Tools</h2>
+            <p>Here are some helpful resources to enhance your financial knowledge and analysis capabilities.</p>
+            
+            <h3>Online Tools</h3>
+            <div class="doc-grid">
+                <div class="doc-card">
+                    <h4>Financial Calculators</h4>
+                    <p>Use online calculators to compute financial ratios, NPV, IRR, and other metrics quickly.</p>
+                </div>
+                <div class="doc-card">
+                    <h4>Spreadsheet Templates</h4>
+                    <p>Download Excel templates for income statements, balance sheets, and financial forecasting.</p>
+                </div>
+                <div class="doc-card">
+                    <h4>Data Sources</h4>
+                    <p>Access financial data from SEC filings, Yahoo Finance, Google Finance, and Bloomberg.</p>
+                </div>
+            </div>
+            
+            <h3>Learning Resources</h3>
+            <ul style="margin-left: 2rem; color: #555;">
+                <li>Corporate Finance courses on Coursera and edX</li>
+                <li>YouTube channels dedicated to financial analysis</li>
+                <li>Books: "The Intelligent Investor" by Benjamin Graham</li>
+                <li>Books: "Financial Statement Analysis" by Erich M. Weiss</li>
+            </ul>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2026 Financial Documentation. All rights reserved.</p>
+        <p>This documentation is provided for educational purposes.</p>
+        <p>Last Updated: March 9, 2026</p>
+    </footer>
+    
+    <script>
+        // Navigation functionality
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Remove active class from all links and sections
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+                
+                // Add active class to clicked link and corresponding section
+                link.classList.add('active');
+                const sectionId = link.getAttribute('data-section');
+                document.getElementById(sectionId).classList.add('active');
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            });
+        });
+    </script>
+</body>
+</html>
+
